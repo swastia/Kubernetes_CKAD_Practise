@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-3
+  labels: #Label can have any properties under it, can be named anything
+    app: nginx-pod #using this label, to test replicaset terminates any other new pods
+    tier: frontend
+
+spec:
+  containers: #list/ array because one pod can have multiple containers under it
+    - image: nginx
+      name: nginx

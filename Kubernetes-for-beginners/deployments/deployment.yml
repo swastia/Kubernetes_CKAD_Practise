@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp-deployment
+  labels:
+    tier: frontend
+    app: nginx
+spec:
+  template:
+    metadata:
+      name: nginx-pod
+      labels: #Label can have any properties under it, can be named anything
+        app: nginx-pod
+        tier: frontend
+    spec:
+      containers: #list/ array because one pod can have multiple containers under it
+        - name: nginx
+          image: nginx
+  replicas: 6
+  selector:
+    matchLabels:
+      app: nginx-pod
+      tier: frontend

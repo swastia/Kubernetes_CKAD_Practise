@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: nginx-replicaset
+  labels: #label of replica set, does not play a role in tying pod with replicase 
+
+spec:
+  template: # pod metada and spec
+    metadata:
+      name: nginx-pod
+      labels: #Label can have any properties under it, can be named anything
+        app: nginx-pod
+        tier: frontend
+    spec:
+      containers: #list/ array because one pod can have multiple containers under it
+        - name: nginx
+          image: nginx
+      
+  replicas: 3 #number of pod replicas
+  selector: # matches the tags of pods controlled by this replicasets
+    matchLabels: # labels used in pod
+      app: nginx-pod
+      tier: frontend
